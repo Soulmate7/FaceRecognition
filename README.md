@@ -237,5 +237,9 @@ if __name__=='__main__':
 
 
 ## 参考资料
-cv2.rectangle 参数含义：https://blog.csdn.net/Gaowang_1/article/details/103087922?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162114388816780264037797%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=162114388816780264037797&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-103087922.first_rank_v2_pc_rank_v29&utm_term=cv2.rectangle
-detectmultiscale函数参数含义：https://blog.csdn.net/weixin_39900531/article/details/111514957?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162114885516780366566806%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=162114885516780366566806&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-1-111514957.first_rank_v2_pc_rank_v29&utm_term=face_cascaded.detectMultiScale
+[cv2.rectangle 参数含义](https://blog.csdn.net/Gaowang_1/article/details/103087922?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162114388816780264037797%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=162114388816780264037797&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-103087922.first_rank_v2_pc_rank_v29&utm_term=cv2.rectangle)
+
+
+[detectmultiscale函数参数含义](https://blog.csdn.net/weixin_39900531/article/details/111514957?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162114885516780366566806%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=162114885516780366566806&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-1-111514957.first_rank_v2_pc_rank_v29&utm_term=face_cascaded.detectMultiScale)
+
+[DLib完成人脸识别项目详细说明](https://blog.csdn.net/jiangyingfeng/article/details/82021553?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162115414116780264023677%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=162115414116780264023677&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-1-82021553.first_rank_v2_pc_rank_v29&utm_term=detector%28gray%2C1%29)
