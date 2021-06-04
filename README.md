@@ -80,6 +80,7 @@ if __name__ == '__main__':
 ```
 
 - **识别结果**
+
 ![result](image/result1.png)
 可以看到，虽然有一些人脸能够被正确识别到，但还是有一些人脸（例如侧脸）不能够识别，甚至有一些错误的识别。这就要求我们使用更高级的算法来识别人脸
 
@@ -178,18 +179,23 @@ if __name__ =='__main__':
 ```
 
 - **识别结果**
+
 ![result](image/result2.png)
 
 可以看到，相比较第一次识别的结果，这一次的准确度提高了，但是在这次识别中，侧脸依旧无法识别，所以我们要找到人脸特征点。
+
+## 人脸对齐
 
 ### 人脸特征点
 Dlib有专门的函数和模型，能够实现人脸68个特征点的定位。
 找到特征点后，就可以通过图像的几何变换（仿射、旋转、缩放），使各个特征点对齐（将眼睛、嘴等部位移到相同位置）。
 
 - **下载包**
+
 需要下载包：[shape_predictor_68_face_landmarks.dat]("shape_predictor_68_face_landmarks.dat")
 并添加到路径"/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages"中（mac用户）
 - **code-demo**
+
 ``` python
 #coding=utf-8
 
@@ -222,29 +228,72 @@ if __name__=='__main__':
     detect('image/101.png')
 ```
 - **识别结果**
+
 ![result3](image/result3.png)
 
 虽然这次依旧没有能够把侧脸识别出，这说明了我们的算法依然待提升，但是成功将几个人脸的特征点提取出来了，这也为我们之后对人脸进行对齐等操作提供了数据。
 
 不如来欣赏一下其他特征点结果吧：
+
 ![lmy2](image/lmy2.png)
 
-## 人脸对齐
+然后，根据检测到的特征点，进行平移旋转等操作，将人脸位于正面，便于机器识别
 
 ## 提取人脸的特征向量
 
+人脸对齐后，我们可以输入对齐的人脸，然后通过特征向量提取器，返回特征向量
+
+![特征向量](image/xl.png)
+
+每个人脸识别系统都有自己的人脸数据库，该数据库包含人脸特征向量和对应的信息
+
+具体实现算法不在此演示
+
 ## 人脸匹配
 
+提取出人脸特征向量后，我们将其与数据库的人脸特征向量进行比对，如果距离超出了特定值，那么匹配失败，反之匹配成功。
 
+``` python
+import cv2
+import face_recognition
+#显示已知图片
 
+def match(img1,img2):
+    known_image=cv2.imread("image/xl1.JPG")#已知人脸图
+    #显示已知图片
+    cv2.imshow("image", known_image)
+    #cv2.waitKey(0)
+    #cv2.destroyAllWindows()
+    #导入图片
+    known_image = face_recognition.load_image_file("image/xl1.JPG")
+    # 显示待匹配图片
+    unknown_image=cv2.imread("image/xl2.JPG")
+    cv2.imshow("unknown_image", unknown_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    #导入图片
+    unknown_image = face_recognition.load_image_file("image/xl2.JPG")
+    #获取
+    known_encoding = face_recognition.face_encodings(known_image)[0]
+    unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
+    #将人脸编码列表与候选编码进行比较，看看它们是否匹配
+    #tolerance低于设定的面与面之间的距离视为匹配，越低越严格。默认0.6为典型的最佳性能
+    results = face_recognition.compare_faces([known_encoding],
+                                             unknown_encoding,
+                                             tolerance=0.6)
+    if results[0] == True:
+        print("匹配成功，该未知图片与已有图片人脸可匹配！")
+    else:
+        print("匹配失败！")
 
+if __name__=='__main__':
+    match("image/xl1.JPG","image/xl2.JPG")
+```
+- 结果
 
+![match](image/match.png)
 
-
-
-
-
-
+可以看到，匹配成功！
 
 ## 参考资料
 [cv2.rectangle 参数含义](https://blog.csdn.net/Gaowang_1/article/details/103087922?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162114388816780264037797%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=162114388816780264037797&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-103087922.first_rank_v2_pc_rank_v29&utm_term=cv2.rectangle)
